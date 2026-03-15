@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Resume Preview</h2>
+
+<div class="mb-3">
+    <label class="form-label">Choose Template:</label>
+    <div class="btn-group">
+        <a href="{{ url_for('preview', session_id=session_id, template='basic') }}"
+           class="btn btn-outline-secondary {% if template_type=='basic' %}active{% endif %}">
+           Basic
+        </a>
+        <a href="{{ url_for('preview', session_id=session_id, template='moderate') }}"
+           class="btn btn-outline-secondary {% if template_type=='moderate' %}active{% endif %}">
+           Moderate
+        </a>
+        <a href="{{ url_for('preview', session_id=session_id, template='professional') }}"
+           class="btn btn-outline-secondary {% if template_type=='professional' %}active{% endif %}">
+           Professional
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8">
+        <div class="border p-4 bg-white" style="max-width:800px;">
+            <h3 class="text-center mb-1">{{ resume.name }}</h3>
+            <p class="text-center small">
+                {{ resume.email }}{% if resume.phone %} | {{ resume.phone }}{% endif %}
+                {% if resume.linkedin %} | {{ resume.linkedin }}{% endif %}
+                {% if resume.github %} | {{ resume.github }}{% endif %}
+            </p>
+            <hr>
+
+            {% if resume.professional_summary %}
+            <h5>Professional Summary</h5>
+            <p class="small">{{ resume.professional_summary }}</p>
+            {% endif %}
+
+            {% if resume.skills %}
+            <h5>Technical Skills</h5>
+            <p class="small">{{ resume.skills|join(', ') }}</p>
+            {% endif %}
+
+            {% if resume.experience %}
+            <h5>Experience</h5>
+            <ul class="small">
+                {% for exp in resume.experience %}
+                <li>{{ exp }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if resume.projects %}
+            <h5>Projects</h5>
+            <ul class="small">
+                {% set max_projects = resume.template_config.max_projects %}
+                {% for proj in resume.projects[:max_projects] %}
+                <li>{{ proj }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if resume.education %}
+            <h5>Education</h5>
+            <ul class="small">
+                {% for edu in resume.education %}
+                <li>{{ edu }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if resume.template_config.show_certifications and resume.certifications %}
+            <h5>Certifications</h5>
+            <ul class="small">
+                {% for cert in resume.certifications %}
+                <li>{{ cert }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if resume.template_config.show_languages and resume.languages %}
+            <h5>Languages</h5>
+            <p class="small">{{ resume.languages|join(', ') }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="col-lg-4 mt-3 mt-lg-0">
+        <div class="card">
+            <div class="card-body">
+                <h5>AI Suggestions</h5>
+                <p class="small text-muted">
+                    Example bullets that you can copy into your experience/projects:
+                </p>
+                <ul class="small">
+                    {% for b in bullets %}
+                    <li>{{ b }}</li>
+                    {% endfor %}
+                </ul>
+                <hr>
+                <a href="{{ url_for('download', session_id=session_id, template=template_type) }}"
+                   class="btn btn-success w-100 mb-2">
+                   Download PDF
+                </a>
+                <a href="{{ url_for('form') }}" class="btn btn-secondary w-100">
+                   Edit Information
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

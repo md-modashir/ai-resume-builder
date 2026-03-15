@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Enter Your Details</h2>
+<p class="text-muted">AI will help you generate a professional, ATS-friendly resume.</p>
+
+<form method="POST" action="{{ url_for('form') }}">
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5>Personal Information</h5>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="name" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Target Role</label>
+                    <input type="text" name="target_role" class="form-control" placeholder="Full-Stack Developer">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Phone</label>
+                    <input type="text" name="phone" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">LinkedIn</label>
+                    <input type="text" name="linkedin" class="form-control">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">GitHub</label>
+                    <input type="text" name="github" class="form-control">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5>Summary & Skills</h5>
+            <div class="mb-3">
+                <label class="form-label">Professional Summary (optional)</label>
+                <textarea name="professional_summary" class="form-control" rows="3"
+                 placeholder="2–3 lines about your profile. If empty, AI will generate it."></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Skills (comma-separated)</label>
+                <textarea name="skills" class="form-control" rows="2"
+                 placeholder="Python, Flask, MySQL, HTML, CSS, JavaScript"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Languages (comma-separated)</label>
+                <input name="languages" class="form-control" placeholder="English, Hindi">
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5>Experience, Projects & Education</h5>
+            <div class="mb-3">
+                <label class="form-label">Experience (one per line)</label>
+                <textarea name="experience" class="form-control" rows="4"
+                 placeholder="Role at Company – key responsibility or achievement"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Projects (one per line)</label>
+                <textarea name="projects" class="form-control" rows="4"
+                 placeholder="Project name – tech stack – what you did"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Education (one per line)</label>
+                <textarea name="education" class="form-control" rows="3"
+                 placeholder="Degree – College – Year"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Certifications (one per line)</label>
+                <textarea name="certifications" class="form-control" rows="3"
+                 placeholder="Course / Certificate – Platform – Year"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Preview Resume</button>
+</form>
+{% endblock %}

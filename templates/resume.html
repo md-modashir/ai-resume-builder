@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="resume border p-4 mb-3">
+    <h2 class="text-center">{{ resume.name }}</h2>
+    <p class="text-center">
+        {{ resume.email }} | {{ resume.phone }}<br>
+        <a href="{{ resume.linkedin }}" target="_blank">{{ resume.linkedin }}</a> |
+        <a href="{{ resume.github }}" target="_blank">{{ resume.github }}</a>
+    </p>
+    <hr>
+
+    <h4>Profile Summary</h4>
+    <p>{{ summary }}</p>
+
+    <h4>Key Highlights</h4>
+    <ul>
+        {% for b in bullets %}
+            <li>{{ b }}</li>
+        {% endfor %}
+    </ul>
+
+    {% if resume.skills %}
+        <h4>Skills</h4>
+        <ul class="skills-list">
+            {% for skill in resume.skills %}
+                <li>{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if resume.projects %}
+        <h4>Projects</h4>
+        <ul>
+            {% for pr in resume.projects %}
+                <li>{{ pr }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if resume.experience %}
+        <h4>Experience</h4>
+        <ul>
+            {% for ex in resume.experience %}
+                <li>{{ ex }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if resume.education %}
+        <h4>Education</h4>
+        <ul>
+            {% for ed in resume.education %}
+                <li>{{ ed }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+
+<form method="POST" action="/portfolio">
+    <input type="hidden" name="name" value="{{ resume.name }}">
+    <input type="hidden" name="email" value="{{ resume.email }}">
+    <input type="hidden" name="linkedin" value="{{ resume.linkedin }}">
+    <input type="hidden" name="github" value="{{ resume.github }}">
+    <input type="hidden" name="projects" value="{% for pr in resume.projects %}{{ pr }}&#10;{% endfor %}">
+    <button type="submit" class="btn btn-success">Generate Portfolio Page</button>
+</form>
+{% endblock %}

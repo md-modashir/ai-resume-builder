@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="portfolio-page">
+    <header class="mb-4">
+        <h2>{{ resume.name }}</h2>
+        <p>{{ resume.email }}</p>
+        <p>
+            <a href="{{ resume.linkedin }}" target="_blank">LinkedIn</a> |
+            <a href="{{ resume.github }}" target="_blank">GitHub</a>
+        </p>
+    </header>
+
+    {% if resume.projects %}
+        <section>
+            <h4>Projects</h4>
+            <ul>
+                {% for pr in resume.projects %}
+                    <li>{{ pr }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8 text-center py-5">
+        <h1 class="mb-3">Build Your ATS-Friendly Resume</h1>
+        <p class="lead mb-4">
+            AI-assisted resume and portfolio builder for students and freshers.
+            Choose from basic, moderate, and professional templates and export to PDF.
+        </p>
+        <a href="{{ url_for('form') }}" class="btn btn-primary btn-lg">
+            Start Building Resume
+        </a>
+    </div>
+</div>
+{% endblock %}
